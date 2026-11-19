@@ -1,0 +1,268 @@
+/* Reading shelf ("Pinjam Buku") in the customer app: the home-screen section,
+   the /buku page, and the borrow sheet. Books use the menu's own pieces
+   (pl-sec, pl-list, pl-item, pl-thumb, pl-add), scoped the same way. */
+[data-page="pelanggan"] {
+  /* ---------- Book rows (home section and /buku), like menu rows ---------- */
+  .pl-sec-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--color-text);
+    font: 600 var(--text-label-md) / 1.3 var(--font-ui);
+    text-decoration: none;
+  }
+  .pl-sec-link:hover {
+    text-decoration: underline;
+  }
+  .pl-sec-link:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* The cover stands in the thumb tile like a book on a shelf. */
+  .pl-book-thumb {
+    font-size: 30px;
+    color: var(--color-text-faint);
+  }
+  .pl-book-thumb img {
+    display: block;
+    width: auto;
+    max-width: 62px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 2px 4px 4px 2px;
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.14),
+      0 4px 10px -4px rgb(0 0 0 / 0.35);
+  }
+  .pl-book-by {
+    overflow: hidden;
+    font-weight: 500;
+    color: var(--color-text-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* Leave room for the status chip, like "Habis" on a menu row. */
+  .pl-book:not([data-state="shelf"]) .pl-book-by {
+    padding-right: 76px;
+  }
+  .pl-book .pl-sold {
+    cursor: pointer;
+  }
+
+  /* ---------- /buku page ---------- */
+  .pl-books-app {
+    padding-bottom: 48px;
+  }
+  .pl-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    min-height: 40px;
+    padding: 0 14px 0 8px;
+    border: var(--border-hairline) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: 600 var(--text-label-md) / 1 var(--font-ui);
+    text-decoration: none;
+  }
+  .pl-back :is(iconify-icon, svg.lucide) {
+    font-size: 20px;
+  }
+  .pl-back:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+  .pl-books-eyebrow {
+    margin-top: 20px;
+  }
+  .pl-books-eyebrow + .pl-thesis {
+    outline: none;
+  }
+  .pl-books-note {
+    padding: 8px var(--space-4) 0;
+    font: 400 var(--text-label-sm) / 1.4 var(--font-ui);
+    color: var(--color-text-muted);
+  }
+  .pl-author {
+    display: block;
+    margin-top: 2px;
+    overflow: hidden;
+    font: 500 13px / 1.35 var(--font-ui);
+    color: var(--color-text-soft);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* ---------- Borrow sheet ---------- */
+  .pl-sheet {
+    width: 100%;
+    max-width: 440px;
+    max-height: min(88dvh, 720px);
+    margin: auto auto 0;
+    padding: 0;
+    border: 0;
+    border-radius: 20px 20px 0 0;
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-nav);
+    overscroll-behavior: contain;
+  }
+  .pl-sheet::backdrop {
+    background: rgb(20 16 20 / 0.45);
+  }
+  .pl-sheet-body {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    padding: 14px var(--space-4)
+      calc(var(--space-4) + env(safe-area-inset-bottom));
+  }
+  .pl-sheet-grip {
+    justify-self: center;
+    width: 40px;
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--color-border-strong);
+  }
+  .pl-sheet-x {
+    position: absolute;
+    inset: 10px 10px auto auto;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-muted);
+    color: var(--color-text);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .pl-sheet-x:focus-visible,
+  .pl-cta:focus-visible,
+  .pl-field input:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+  .pl-sheet-top {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-end;
+    padding-right: 40px;
+  }
+  .pl-sheet-cover {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 104px;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 3px 8px 8px 3px;
+    background: var(--color-surface-muted);
+    font-size: 34px;
+    color: var(--color-text-faint);
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.14),
+      0 10px 20px -8px rgb(0 0 0 / 0.45);
+  }
+  .pl-sheet-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pl-sheet-meta {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    min-width: 0;
+  }
+  .pl-sheet-meta h2 {
+    font: 600 20px / 1.25 var(--font-ui);
+    letter-spacing: -0.3px;
+  }
+  .pl-sheet-meta .pl-author {
+    white-space: normal;
+  }
+  .pl-sheet-desc {
+    font: 400 var(--text-body-sm) / 1.55 var(--font-ui);
+    color: var(--color-text-soft);
+  }
+  .pl-sheet-note {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    border: var(--border-hairline) solid var(--pl-tone, var(--color-border));
+    border-radius: var(--radius-control);
+    background: color-mix(
+      in srgb,
+      var(--pl-tone, var(--color-border)) 10%,
+      var(--color-surface)
+    );
+    font: 400 var(--text-body-sm) / 1.45 var(--font-ui);
+  }
+  .pl-sheet-note > :is(iconify-icon, svg.lucide) {
+    flex: none;
+    margin-top: 2px;
+    font-size: 18px;
+    color: var(--pl-tone, var(--color-text-muted));
+  }
+  .pl-sheet-note[data-tone="positive"] {
+    --pl-tone: var(--color-positive);
+  }
+  .pl-sheet-note[data-tone="warning"] {
+    --pl-tone: var(--color-warning);
+  }
+  .pl-sheet-note[data-tone="danger"] {
+    --pl-tone: var(--color-danger);
+  }
+  .pl-field {
+    display: grid;
+    gap: 6px;
+    font: 600 var(--text-label-md) / 1.3 var(--font-ui);
+  }
+  .pl-field small {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+  .pl-field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    border: var(--border-hairline) solid var(--color-border-strong);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+    font: 400 16px / 1.3 var(--font-ui);
+  }
+  .pl-sheet-hint {
+    font: 400 var(--text-label-sm) / 1.45 var(--font-ui);
+    color: var(--color-text-muted);
+  }
+  .pl-sheet-err {
+    font: 500 var(--text-body-sm) / 1.4 var(--font-ui);
+    color: var(--color-danger);
+  }
+  .pl-cta {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: 52px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    font: 600 var(--text-body-md) / 1 var(--font-ui);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-standard);
+  }
+  .pl-cta:hover {
+    background: var(--color-primary-hover);
+  }
+  .pl-cta:disabled {
+    background: var(--color-border-strong);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+}
